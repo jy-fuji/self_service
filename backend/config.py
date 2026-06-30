@@ -55,8 +55,8 @@ class Config:
     AOAI_KEY = _g("AZURE_OPENAI_API_KEY")
     AOAI_API_VERSION = _g("AZURE_OPENAI_API_VERSION", "2025-04-01-preview")
     AOAI_EMBED_API_VERSION = _g("AZURE_OPENAI_EMBED_API_VERSION", "2024-10-21")
-    AOAI_CHAT_DEPLOYMENT = _g("AZURE_OPENAI_CHAT_DEPLOYMENT", "gpt-4o-mini")
-    AOAI_EMBED_DEPLOYMENT = _g("AZURE_OPENAI_EMBED_DEPLOYMENT", "text-embedding-3-small")
+    AOAI_CHAT_DEPLOYMENT = _g("AZURE_OPENAI_CHAT_DEPLOYMENT", "gpt-5.4-mini")
+    AOAI_EMBED_DEPLOYMENT = _g("AZURE_OPENAI_EMBED_DEPLOYMENT", "text-embedding-ada-002")
     # API surface for the chat model: 'auto' tries the Responses API (needed by
     # reasoning models like gpt-5.x-pro) and falls back to Chat Completions.
     AOAI_API_STYLE = _g("AZURE_OPENAI_API_STYLE", "auto").lower()
