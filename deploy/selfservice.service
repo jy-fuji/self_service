@@ -1,0 +1,18 @@
+[Unit]
+Description=Self-Service Provisioning demo
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# EDIT these three for your VM:
+User=azureuser
+WorkingDirectory=/opt/self_service/service
+ExecStart=/usr/bin/python3 run.py
+Environment=HOST=0.0.0.0
+Environment=PORT=8137
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

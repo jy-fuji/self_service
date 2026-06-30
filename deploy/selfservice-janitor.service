@@ -1,0 +1,9 @@
+[Unit]
+Description=Self-Service Provisioning TTL sweep (one-shot)
+
+[Service]
+Type=oneshot
+# EDIT to match selfservice.service:
+User=azureuser
+WorkingDirectory=/opt/self_service/service
+ExecStart=/usr/bin/python3 cleanup.py

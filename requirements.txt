@@ -1,0 +1,16 @@
+# Self-Service Provisioning — backend dependencies
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-dotenv>=1.0
+numpy>=1.26
+
+# Azure OpenAI (the AI brain) — required for live planning + RAG.
+# openai>=2.0 is needed for the Responses API (gpt-5.x reasoning models).
+openai>=2.0
+# truststore makes Python trust the OS cert store (corporate TLS proxies).
+truststore>=0.9
+
+# Azure control plane — required only for real deployment + CMDB
+azure-identity>=1.17
+azure-mgmt-resource>=24
+azure-mgmt-resourcegraph>=8
