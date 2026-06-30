@@ -19,13 +19,14 @@ def credential():
             from azure.identity import ClientSecretCredential
             _cred = ClientSecretCredential(cfg.TENANT_ID, cfg.CLIENT_ID, cfg.CLIENT_SECRET)
         else:
-            # No service principal — sign in as the user. Try any existing CLI /
-            # PowerShell session first; otherwise prompt (browser or device code).
-            from azure.identity import (AzureCliCredential, AzurePowerShellCredential,
-                                        InteractiveBrowserCredential, DeviceCodeCredential,
-                                        ChainedTokenCredential)
+            # No service principal. On an Azure VM this uses the VM's managed
+            # identity (no secrets); otherwise it falls back to an existing az /
+            # PowerShell session, then an interactive sign-in.
+            from azure.identity import (ManagedIdentityCredential, AzureCliCredential,
+                                        AzurePowerShellCredential, InteractiveBrowserCredential,
+                                        DeviceCodeCredential, ChainedTokenCredential)
             kw = {"tenant_id": cfg.TENANT_ID} if cfg.TENANT_ID else {}
-            chain = [AzureCliCredential(), AzurePowerShellCredential()]
+            chain = [ManagedIdentityCredential(), AzureCliCredential(), AzurePowerShellCredential()]
             chain.append(DeviceCodeCredential(**kw) if cfg.AUTH_FLOW == "device"
                          else InteractiveBrowserCredential(**kw))
             _cred = ChainedTokenCredential(*chain)
